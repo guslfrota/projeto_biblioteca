@@ -1,0 +1,20 @@
+ <?php if(isset($_SESSION['usuario_id']) && isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == "admin"): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.php">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="usuarios.php">Usuários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="relatorios.php">Relatórios</a>
+                        </li>
+                    <?php endif; ?>
+
+
+
+
+    <?php if(isset($_SESSION['usuario_id']) && isset($_SESSION['usuario_tipo']) && $_SESSION['usuario_tipo'] == "admin"): ?>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#livroModal">
+            <i class="fas fa-plus"></i> Novo Livro
+        </button>
+    <?php endif; ?>

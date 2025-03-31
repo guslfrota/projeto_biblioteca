@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - vendor_volume:/var/www/html/vendor
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=biblioteca_user
+      - DB_PASS=biblioteca_password
+      - DB_NAME=biblioteca
+    networks:
+      - biblioteca-network
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=biblioteca
+      - MYSQL_USER=biblioteca_user
+      - MYSQL_PASSWORD=biblioteca_password
+      - MYSQL_ROOT_PASSWORD=root_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/biblioteca.sql:/docker-entrypoint-initdb.d/biblioteca.sql
+    networks:
+      - biblioteca-network
+
+volumes:
+  mysql_data:
+  vendor_volume:
+
+networks:
+  biblioteca-network:
+    driver: bridge 
